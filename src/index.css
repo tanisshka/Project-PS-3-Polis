@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 138 76% 97%;
+    --foreground: 166 86% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 166 86% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 141 84% 93%;
+    --secondary-foreground: 166 86% 16%;
+
+    --muted: 140 42% 92%;
+    --muted-foreground: 164 28% 32%;
+
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 139 48% 86%;
+    --input: 139 48% 86%;
+    --ring: 142 71% 45%;
+
+    --radius: 0.85rem;
+
+    --success: 142 71% 45%;
+    --warning: 48 96% 53%;
+    --danger-soft: 0 84% 95%;
+    --auth-foreground: 0 0% 100%;
+    --auth-muted: 141 84% 93%;
+    --auth-input: 0 0% 100% / 0.94;
+    --auth-border: 0 0% 100% / 0.24;
+    --gradient-civic: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 76% 36%));
+    --gradient-soft: linear-gradient(180deg, hsl(138 76% 97%), hsl(141 84% 93%));
+    --shadow-civic: 0 18px 45px -24px hsl(142 76% 20% / 0.55);
+    --shadow-civic-lg: 0 24px 70px -28px hsl(142 76% 20% / 0.65);
+    --shadow-glass: 0 28px 80px -28px hsl(160 84% 4% / 0.75);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+}
+
+@layer components {
+  .leaflet-container {
+    @apply h-full w-full rounded-[inherit] font-sans;
+    min-height: 520px;
+    background: hsl(var(--secondary));
+  }
+
+  .leaflet-tile-pane {
+    filter: saturate(1.08) contrast(1.02);
+  }
+
+  .civic-marker {
+    animation: marker-drop 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .leaflet-popup-content-wrapper {
+    @apply rounded-2xl border border-border bg-card text-card-foreground shadow-civic;
+  }
+
+  .leaflet-popup-content {
+    @apply m-0;
+  }
+
+  .marker-pin {
+    @apply flex h-9 w-9 items-center justify-center rounded-full border-2 border-card text-xs font-bold text-primary-foreground shadow-civic;
+  }
+
+  .marker-infrastructure { @apply bg-primary; }
+  .marker-sanitation { @apply bg-accent; }
+  .marker-safety { @apply bg-destructive; }
+  .marker-greenery { @apply bg-success; }
+  .marker-user { @apply bg-primary ring-4 ring-card; }
+  .marker-cluster { @apply bg-foreground text-background ring-4 ring-secondary; }
+}
+
+@keyframes marker-drop {
+  from { transform: translateY(-18px) scale(0.78); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
